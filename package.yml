@@ -1,0 +1,11 @@
+package: fonts
+version: "0.0.1-alpha"
+author: Andreas Lenhardt
+
+page:
+    title: "Fonts"
+    perm: fonts[]
+    icon: rex-icon fa-font
+
+requires:
+    redaxo: "^5.12"
