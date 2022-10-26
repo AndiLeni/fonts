@@ -1,6 +1,6 @@
 <?php
 
-echo rex_view::title('Google Fonts für REDAXO');
+echo rex_view::title(rex_i18n::msg("fonts_title"));
 
 // parameter check
 $selected_variants = rex_post("selected_variants", "array", []);
@@ -9,7 +9,6 @@ $selected_font = rex_get("sel_font", "string", "");
 
 // selected variants to download
 if ($selected_variants != []) {
-
     try {
         $socket = rex_socket::factory('google-webfonts-helper.herokuapp.com', '443', true);
         $socket->setPath('/api/fonts/' . $selected_font);
@@ -26,7 +25,6 @@ if ($selected_variants != []) {
             // download font files
             foreach ($font['variants'] as $fv) {
                 if (in_array($fv['id'], $selected_variants)) {
-
                     $font_name = str_replace("'", "", $fv['fontFamily']);
 
                     // woff2 file
@@ -42,7 +40,7 @@ if ($selected_variants != []) {
                         if ($response->isOk()) {
                             $body = $response->getBody();
 
-                            $saved = file_put_contents(rex_path::addonAssets("fonts", $filename), $body);
+                            $saved = rex_file::put(rex_path::addonAssets("fonts", $filename), $body);
                             if ($saved != false) {
                                 $font_saves[$font_name] = [
                                     "fontFamily" => $fv['fontFamily'],
@@ -51,10 +49,10 @@ if ($selected_variants != []) {
                                     "fileName" => $filename
                                 ];
                             } else {
-                                echo rex_view::error("Schriftart konnte nicht gespeichert werden.");
+                                echo rex_view::error(rex_i18n::msg("fonts_error_save_woff"));
                             }
                         } else {
-                            echo rex_view::error("Download der Schrift von Google nicht möglich. Response Code != 200 OK");
+                            echo rex_view::error(rex_i18n::msg("fonts_error_api_response_code"));
                         }
                     } catch (rex_socket_exception $e) {
                         echo rex_view::error($e->getMessage());
@@ -64,7 +62,6 @@ if ($selected_variants != []) {
 
             // generate css
             foreach ($font_saves as $fs) {
-
                 $fragment = new rex_fragment();
                 $fragment->setVar('fontFamily', $fs['fontFamily'], false);
                 $fragment->setVar('fontStyle', $fs['fontStyle'], false);
@@ -74,19 +71,19 @@ if ($selected_variants != []) {
 
                 $saved = file_put_contents(rex_path::addonAssets("fonts", "fonts.css"), $css, FILE_APPEND);
                 if ($saved == false) {
-                    echo rex_view::error("CSS Datei konnte nicht gespeichert werden.");
+                    echo rex_view::error(rex_i18n::msg("fonts_error_save_css"));
                 }
             }
 
 
-            echo "<h3>Folgende Schriftarten wurden installiert:</h2>";
+            echo "<h3>".rex_i18n::msg("fonts_installed")."</h2>";
             echo "<ul>";
             foreach ($font_saves as $fs) {
                 echo "<li>" . $fs['fontFamily'] . " " . $fs['fontStyle'] . " " . $fs['fontWeight'] . "</li>";
             }
             echo "</ul>";
         } else {
-            echo rex_view::error("API Zugriff auf google-webfonts-helper.herokuapp.com nicht möglich. Response Code != 200 OK");
+            echo rex_view::error(rex_i18n::msg("fonts_error_api_response_code"));
         }
     } catch (rex_socket_exception $e) {
         echo rex_view::error($e->getMessage());
@@ -116,7 +113,7 @@ if ($selected_variants == [] && $selected_font != "") {
             $fragment->setVar('selected_font', $font["family"], true);
             echo $fragment->parse('select_variants_panel.php');
         } else {
-            echo rex_view::error("API Zugriff auf google-webfonts-helper.herokuapp.com nicht möglich. Response Code != 200 OK");
+            echo rex_view::error(rex_i18n::msg("fonts_error_api_response_code"));
         }
     } catch (rex_socket_exception $e) {
         echo rex_view::error($e->getMessage());
@@ -140,7 +137,7 @@ if ($selected_font == "") {
             foreach ($available_fonts as $f) {
                 $table_rows .= "<tr>";
                 $table_rows .= "<td>{$f['family']}</td>";
-                $table_rows .= '<td><a href="' . rex_url::currentBackendPage(['sel_font' => $f['id']]) . '">Installieren</a></td>';
+                $table_rows .= '<td><a href="' . rex_url::currentBackendPage(['sel_font' => $f['id']]) . '">'.rex_i18n::msg("fonts_install").'</a></td>';
                 $table_rows .= "</tr>";
             }
 
@@ -148,7 +145,7 @@ if ($selected_font == "") {
             $fragment->setVar('table_rows', $table_rows, false);
             echo $fragment->parse('all_available_fonts_table.php');
         } else {
-            echo rex_view::error("API Zugriff auf google-webfonts-helper.herokuapp.com nicht möglich. Response Code != 200 OK");
+            echo rex_view::error(rex_i18n::msg("fonts_error_api_response_code"));
         }
     } catch (rex_socket_exception $e) {
         echo rex_view::error($e->getMessage());

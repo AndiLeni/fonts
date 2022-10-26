@@ -1,0 +1,12 @@
+fonts_title = Schriftarten von Google Fonts abrufen
+fonts_installed = Folgende Schriftarten wurden installiert
+fonts_install = Installieren
+
+fonts_list_name = Name
+fonts_list_select = Auswählen
+fonts_list_select_variant = Varianten für
+fonts_list_selected = Ausgewählte Schriften installieren
+
+fonts_error_save_woff = Schriftart konnte nicht gespeichert werden
+fonts_error_save_css = CSS Datei konnte nicht gespeichert werden
+fonts_error_api_response_code = API Zugriff auf google-webfonts-helper.herokuapp.com nicht möglich. Response Code != 200 OK
