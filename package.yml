@@ -1,11 +1,14 @@
 package: fonts
-version: "0.0.1-alpha"
+version: "0.0.2-alpha"
 author: Andreas Lenhardt
 
 page:
     title: "Fonts"
     perm: fonts[]
     icon: rex-icon fa-font
+    subpages:
+        fonts: { title: 'Fonts downloaden'}
+        help: { title: 'Hilfe', subPath: README.md }
 
 requires:
     redaxo: "^5.12"
