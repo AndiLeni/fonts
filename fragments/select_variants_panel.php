@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        Varianten auswählen für <strong><?php echo $this->getVar("selected_font") ?></strong>
+        <?= rex_i18n::msg("fonts_list_select_variant"); ?> <strong><?php echo $this->getVar("selected_font") ?></strong>
     </div>
     <div class="panel-body">
 
@@ -13,7 +13,7 @@
             <?php echo $this->getVar("variant_options") ?>
         </form>
 
-        <h3>Lizenz</h3>
+        <h3><?= rex_i18n::msg("fonts_licence"); ?></h3>
         <div class="row">
             <div class="col-md-6">
                  <textarea class="form-control" style="height: 250px;" readonly>
@@ -24,7 +24,7 @@
 
     </div>
     <div class="panel-footer">
-        <button form="select_variants_form" class="btn btn-primary" type="submit">Ausgewählte Schriftarten installieren</button>
+        <button form="select_variants_form" class="btn btn-primary" type="submit"><?= rex_i18n::msg("fonts_install_selected") ?></button>
     </div>
 </div>
 

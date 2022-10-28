@@ -1,7 +1,7 @@
 <div class="form-group">
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-search"></i></span>
-        <input placeholder="Schrift suchen ..." class="form-control input-lg" id="input_filter" type="text" onkeyup="filter()">
+        <input placeholder="<?= rex_i18n::msg("fonts_list_search") ?>" class="form-control input-lg" id="input_filter" type="text" onkeyup="filter()">
         <span class="input-group-btn">
             <button id="btn_clear" class="btn btn-default btn-lg" type="button">&times;</button>
         </span>
@@ -12,8 +12,10 @@
     <table id="fonts_table" class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Auswählen</th>
+                <th><?= rex_i18n::msg("fonts_list_name") ?>
+                </th>
+                <th><?= rex_i18n::msg("fonts_list_select") ?>
+                </th>
             </tr>
         </thead>
         <tbody>
