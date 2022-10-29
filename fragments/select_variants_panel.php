@@ -13,11 +13,11 @@
             <?php echo $this->getVar("variant_options") ?>
         </form>
 
-        <h3><?= rex_i18n::msg("fonts_licence"); ?></h3>
+        <h3><?php echo rex_i18n::msg("fonts_licence"); ?></h3>
         <div class="row">
             <div class="col-md-6">
-                 <textarea class="form-control" style="height: 250px;" readonly>
-            <?= fonts::getLicense( $this->getVar("selected_font")) ?>
+                <textarea class="form-control" style="height: 250px;" readonly>
+            <?php echo fonts::getLicense($this->getVar("selected_font")) ?>
         </textarea>
             </div>
         </div>
@@ -30,13 +30,13 @@
 
 <script>
     $(document).on('rex:ready', function() {
-        $('#fonts-preview-fontsize').on('change keyup',function (e) {
-            console.log( $(this).val() );
+        $('#fonts-preview-fontsize').on('change keyup', function(e) {
+            console.log($(this).val());
             var fontSize = $(this).val();
-            if(!fontSize) {
+            if (!fontSize) {
                 fontSize = 16;
             }
-            $('#select_variants_form span').each(function () {
+            $('#select_variants_form span').each(function() {
                 $(this).css('font-size', fontSize + 'px');
             })
         })

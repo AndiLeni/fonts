@@ -12,9 +12,9 @@
     <table id="fonts_table" class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th><?= rex_i18n::msg("fonts_list_name") ?>
+                <th><?php echo rex_i18n::msg("fonts_list_name") ?>
                 </th>
-                <th><?= rex_i18n::msg("fonts_list_select") ?>
+                <th><?php echo rex_i18n::msg("fonts_list_select") ?>
                 </th>
             </tr>
         </thead>

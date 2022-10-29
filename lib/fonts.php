@@ -43,21 +43,14 @@ class fonts
         foreach ($font_saves as $key => $fs) {
             $css = '';
             foreach ($fs as $f) {
-                $css .= "@font-face {
-            /* " . $key . " */
-            font-family: '" . $f['fontFamily'] . "';
-            font-style: " . $f['fontStyle'] . ";
-            font-weight: " . $f['fontWeight'] . ";
-            font-display: swap;
-            src: url('assets/addons/fonts/" . $f['identifier'] . ".eot'); /* IE9 Compat Modes */
-            src: local(''),";
-                foreach ($f['formats'] as $fkey => $fformat) {
-                    $css .= "url('assets/addons/fonts/" . $fformat . "') format('$fkey'),
-            ";
-                }
-                $css .= "
-        }
-        ";
+                $fragment = new rex_fragment();
+                $fragment->setVar('key', $key, false);
+                $fragment->setVar('fontFamily', $f['fontFamily'], false);
+                $fragment->setVar('fontStyle', $f['fontStyle'], false);
+                $fragment->setVar('fontWeight', $f['fontWeight'], false);
+                $fragment->setVar('identifier', $f['identifier'], false);
+                $fragment->setVar('formats', $f['formats'], false);
+                $css .= $fragment->parse('css_fontface.php');
             }
             // CSS generieren
             file_put_contents(rex_path::addonAssets("fonts", $key . '/' . $key . ".css"), $css, FILE_APPEND);
@@ -78,8 +71,7 @@ class fonts
         }
 
         foreach ($css_files as $css_file) {
-            $css_all = '@import url("' . rex_url::addonAssets('fonts') . $css_file . '");
-        ';
+            $css_all = '@import url("' . rex_url::addonAssets('fonts') . $css_file . '");' . PHP_EOL;
             file_put_contents(rex_path::addonAssets("fonts/", "gfonts.css"), $css_all, FILE_APPEND);
         }
     } // End generateCss()

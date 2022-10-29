@@ -37,7 +37,7 @@ if ($selected_variants != []) {
         $available_font_formats = [];
         $dirName = $font['id'] . '-' . $font['version'] . '-' . $font['defSubset'];
 
-        if(!is_dir(rex_path::addonAssets('fonts', $dirName))) {
+        if (!is_dir(rex_path::addonAssets('fonts', $dirName))) {
             mkdir(rex_path::addonAssets('fonts', $dirName));
         }
 
@@ -95,10 +95,8 @@ if ($selected_variants != []) {
                     } catch (rex_socket_exception $e) {
                         echo $e->getMessage();
                     }
-
                 }
             }
-
         }
     }
 
@@ -107,35 +105,16 @@ if ($selected_variants != []) {
 
     // generate css
     fonts::generateCss($font_saves);
-    echo "<h3>".rex_i18n::msg("fonts_installed")."</h3>";
-    echo "<ul>";
-    foreach ($font_saves as $fs) {
-        foreach ($fs as $f) {
-            echo "<li>" . $f['fontFamily'] . " " . $f['fontStyle'] . " " . $f['fontWeight'] . "</li>";
-        }
-    }
-    echo "</ul>";
 
-    echo '<div class="well">';
-    echo '<strong>'.rex_i18n::msg("fonts_installed_available_all").'</strong>';
-    echo '<p>';
-    echo '<a href="'.rex_url::addonAssets('fonts', 'gfonts.css').'" target="_blank">';
-    echo rex_url::addonAssets('fonts', 'gfonts.css');
-    echo '</a>';
-    echo '</p>';
-    echo '<p><code>';
-    echo htmlspecialchars('<link href="'.rex_url::addonAssets('fonts', 'gfonts.css').'" rel="stylesheet">');
-    echo '</code></p>';
-    echo '<strong>'.rex_i18n::msg("fonts_installed_available_single").'</strong>';
-    echo '<p>';
-    echo '<a href="'.rex_url::addonAssets('fonts', array_key_first($font_saves).'/'.array_key_first($font_saves).'.css').'" target="_blank">';
-    echo rex_url::addonAssets('fonts', array_key_first($font_saves).'/'.array_key_first($font_saves).'.css');
-    echo '</a>';
-    echo '</p>';
-    echo '<p><code>';
-    echo htmlspecialchars('<link href="'.rex_url::addonAssets('fonts', array_key_first($font_saves).'/'.array_key_first($font_saves).'.css').'" rel="stylesheet">');
-    echo '</code></p>';
-    echo '</div>';
+    // show <link> for inclusion into template
+    $fragment = new rex_fragment();
+    $fragment->setVar("font_saves", $font_saves, false);
+    $fragment->setVar("font_saves", $font_saves, false);
+    $fragment->setVar("font_saves", $font_saves, false);
+    $fragment->setVar("font_saves", $font_saves, false);
+    $fragment->setVar("font_saves", $font_saves, false);
+    $fragment->setVar("font_saves", $font_saves, false);
+    echo $fragment->parse("generated_css.php");
 }
 
 
@@ -153,12 +132,12 @@ if ($selected_variants == [] && $selected_font != "") {
 
             $variant_options = "";
             foreach ($font["variants"] as $fv) {
-                $previewCss =  '<link href="https://fonts.googleapis.com/css?family='.str_replace(" ","+", $fv['fontFamily']).':100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">';
-                echo str_replace("'",'', $previewCss);
+                $previewCss =  '<link href="https://fonts.googleapis.com/css?family=' . str_replace(" ", "+", $fv['fontFamily']) . ':100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">';
+                echo str_replace("'", '', $previewCss);
                 $variant_options .= '
                 <label for="' . $fv['id'] . '">
                     <input id="' . $fv['id'] . '" type="checkbox" name="selected_variants[]" value="' . $fv['id'] . '" /> 
-                        ' . $fv['fontWeight'] . " " . $fv['fontStyle'] . " <span style=\"font-size: 16px; padding-left: 100px; font-family: ".$fv['fontFamily']."; font-weight: ".$fv['fontWeight']."; font-style: ".$fv['fontStyle']." \">".str_replace("'","", $fv['fontFamily'])." - ". $fv['fontWeight'] . " " . $fv['fontStyle'] ."</span>
+                        ' . $fv['fontWeight'] . " " . $fv['fontStyle'] . " <span style=\"font-size: 16px; padding-left: 100px; font-family: " . $fv['fontFamily'] . "; font-weight: " . $fv['fontWeight'] . "; font-style: " . $fv['fontStyle'] . " \">" . str_replace("'", "", $fv['fontFamily']) . " - " . $fv['fontWeight'] . " " . $fv['fontStyle'] . "</span>
                 </label>
                 <br>";
             }
@@ -213,7 +192,7 @@ if ($selected_font == "") {
             foreach ($available_fonts as $f) {
                 $table_rows .= "<tr>";
                 $table_rows .= "<td>{$f['family']}</td>";
-                $table_rows .= '<td><a href="' . rex_url::currentBackendPage(['sel_font' => $f['id']]) . '">'.rex_i18n::msg("fonts_install").'</a></td>';
+                $table_rows .= '<td><a href="' . rex_url::currentBackendPage(['sel_font' => $f['id']]) . '">' . rex_i18n::msg("fonts_install") . '</a></td>';
                 $table_rows .= "</tr>";
             }
 
@@ -227,6 +206,3 @@ if ($selected_font == "") {
         echo rex_view::error($e->getMessage());
     }
 }
-
-
-?>
