@@ -8,7 +8,10 @@ page:
     icon: rex-icon fa-font
     subpages:
         fonts: { title: 'Fonts downloaden'}
+        installed_fonts: { title: 'Installierte Schriften'}
         help: { title: 'Hilfe', subPath: README.md }
 
 requires:
     redaxo: "^5.12"
+    php: 
+        version: "^8.0"
