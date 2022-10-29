@@ -2,9 +2,9 @@
 
 class fonts
 {
-    public static function getLicense($fontName)
+    public static function getLicense(String $fontName): string|false
     {
-        if ($fontName) {
+        if ($fontName != "") {
             $fontName = str_replace(' ', '', strtolower($fontName));
             $possible_folders = ['apache', 'ofl', 'ufl'];
             $license = '';
@@ -19,18 +19,18 @@ class fonts
                     case 'ufl':
                         $fileName = 'UFL.txt';
                 }
-                $url = 'https://raw.githubusercontent.com/google/fonts/main/' . $folder . '/' . $fontName . '/' . $fileName;
-                #dump($url);
-                $curly = curl_init();
-                curl_setopt($curly, CURLOPT_URL, $url);
-                curl_setopt($curly, CURLOPT_HEADER, 0);
-                curl_setopt($curly, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curly, CURLOPT_FOLLOWLOCATION, 1);
-                curl_setopt($curly, CURLOPT_USERAGENT, "REDAXO Fonts-AddOn");
-                $content = curl_exec($curly);
-                curl_close($curly);
-                if ($content !== '404: Not Found') {
-                    $license .= $content;
+
+                try {
+                    $socket = rex_socket::factory('raw.githubusercontent.com', 443, true);
+                    $socket->setPath('/google/fonts/main/' . $folder . '/' . $fontName . '/' . $fileName);
+                    $socket->addHeader('User-Agent', 'REDAXO Fonts-AddOn');
+                    $response = $socket->doGet();
+                    if ($response->isOk()) {
+                        $content = $response->getBody();
+                        $license .= $content;
+                    }
+                } catch (rex_socket_exception $e) {
+                    echo rex_view::error($e->getMessage());
                 }
             } // End foreach
             return $license;
@@ -38,7 +38,7 @@ class fonts
         return false;
     } // End getLicence()
 
-    public static function generateCss($font_saves)
+    public static function generateCss(array $font_saves): void
     {
         foreach ($font_saves as $key => $fs) {
             $css = '';

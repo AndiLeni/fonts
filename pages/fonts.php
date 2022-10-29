@@ -12,7 +12,7 @@ $formats = ['eot', 'woff', 'woff2', 'ttf', 'svg'];
 // selected variants to download
 if ($selected_variants != []) {
     try {
-        $socket = rex_socket::factory('google-webfonts-helper.herokuapp.com', '443', true);
+        $socket = rex_socket::factory('google-webfonts-helper.herokuapp.com', 443, true);
         $socket->setPath('/api/fonts/' . $selected_font);
 
         $response = $socket->doGet();
@@ -25,7 +25,7 @@ if ($selected_variants != []) {
             exit;
         }
     } catch (rex_socket_exception $e) {
-        echo $e->getMessage();
+        echo rex_view::error($e->getMessage());
         exit;
     }
 
@@ -41,7 +41,7 @@ if ($selected_variants != []) {
             mkdir(rex_path::addonAssets('fonts', $dirName));
         }
 
-        if (in_array($fv['id'], $selected_variants)) {
+        if (in_array($fv['id'], $selected_variants, true)) {
 
             foreach ($formats as $format) {
                 if (array_key_exists($format, $fv)) {
@@ -58,7 +58,7 @@ if ($selected_variants != []) {
                     #dump($format);
 
                     try {
-                        $socket = rex_socket::factory($url['host'], '443', true);
+                        $socket = rex_socket::factory($url['host'], 443, true);
                         $socket->setPath($url['path']);
 
                         $response = $socket->doGet();
@@ -93,7 +93,7 @@ if ($selected_variants != []) {
                             echo "Error " . $filename;
                         }
                     } catch (rex_socket_exception $e) {
-                        echo $e->getMessage();
+                        echo rex_view::error($e->getMessage());
                     }
                 }
             }
@@ -121,7 +121,7 @@ if ($selected_variants != []) {
 // select variants
 if ($selected_variants == [] && $selected_font != "") {
     try {
-        $socket = rex_socket::factory('google-webfonts-helper.herokuapp.com', '443', true);
+        $socket = rex_socket::factory('google-webfonts-helper.herokuapp.com', 443, true);
         $socket->setPath('/api/fonts/' . $selected_font);
 
         $response = $socket->doGet();
@@ -156,7 +156,7 @@ if ($selected_variants == [] && $selected_font != "") {
 
 // get available fonts
 try {
-    $socket = rex_socket::factory('google-webfonts-helper.herokuapp.com', '443', true);
+    $socket = rex_socket::factory('google-webfonts-helper.herokuapp.com', 443, true);
     $socket->setPath('/api/fonts');
 
     $response = $socket->doGet();
@@ -169,7 +169,7 @@ try {
         exit;
     }
 } catch (rex_socket_exception $e) {
-    echo $e->getMessage();
+    echo rex_view::error($e->getMessage());
     exit;
 }
 
@@ -179,7 +179,7 @@ try {
 // if no font is selected, list all available fonts
 if ($selected_font == "") {
     try {
-        $socket = rex_socket::factory('google-webfonts-helper.herokuapp.com', '443', true);
+        $socket = rex_socket::factory('google-webfonts-helper.herokuapp.com', 443, true);
         $socket->setPath('/api/fonts');
 
         $response = $socket->doGet();
