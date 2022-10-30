@@ -109,11 +109,6 @@ if ($selected_variants != []) {
     // show <link> for inclusion into template
     $fragment = new rex_fragment();
     $fragment->setVar("font_saves", $font_saves, false);
-    $fragment->setVar("font_saves", $font_saves, false);
-    $fragment->setVar("font_saves", $font_saves, false);
-    $fragment->setVar("font_saves", $font_saves, false);
-    $fragment->setVar("font_saves", $font_saves, false);
-    $fragment->setVar("font_saves", $font_saves, false);
     echo $fragment->parse("generated_css.php");
 }
 
