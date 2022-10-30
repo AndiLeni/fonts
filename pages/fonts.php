@@ -47,7 +47,7 @@ if ($selected_variants != []) {
                 if (array_key_exists($format, $fv)) {
                     #$filename = str_replace("'", "", $fv['fontFamily']) . '-' . $fv['id'] . '.'.$format;
                     #$filename = id version subset weight
-                    $filename = $font['id'] . '-' . $font['version'] . '-' . $font['defSubset'] . '-' . $fv['fontWeight'] . '.' . $format;
+                    $filename = $font['id'] . '-' . $font['version'] . '-' . $font['defSubset'] . '-' . $fv['fontStyle'] . '-' . $fv['fontWeight'] . '.' . $format;
                     $url = parse_url($fv[$format]);
 
                     #echo '$fv:';
