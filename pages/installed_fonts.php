@@ -40,12 +40,12 @@ function get_files(string $path): array
 }
 
 
-$installed_fonts = get_folders(rex_path::addonAssets("fonts"));
+$font_folders = get_folders(rex_path::addonAssets("fonts"));
 
 $fonts = [];
 
-foreach ($installed_fonts as $f) {
-    $files = get_files(rex_path::addonAssets("fonts", $f));
+foreach ($font_folders as $folder) {
+    $files = get_files(rex_path::addonAssets("fonts", $folder));
 
     // font weights
     $re = '/[0-9]{3}\.woff2/';
@@ -61,7 +61,7 @@ foreach ($installed_fonts as $f) {
     $weights = implode(",", $weights);
 
     $fonts[] = [
-        "name" => $file,
+        "name" => $folder,
         "weights" => $weights,
     ];
 }
