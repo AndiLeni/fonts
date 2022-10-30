@@ -48,7 +48,7 @@ foreach ($font_folders as $folder) {
     $files = get_files(rex_path::addonAssets("fonts", $folder));
 
     // font weights
-    $re = '/[0-9]{3}\.woff2/';
+    $re = '/(italic|normal)-[0-9]{3}/';
     $weights = [];
 
     foreach ($files as $file) {
