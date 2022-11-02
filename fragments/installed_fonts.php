@@ -12,7 +12,7 @@
         echo "<td>" . $font["weights"] . "</td>";
         echo "<td>";
         echo "<code>";
-        echo htmlspecialchars('<link rel="stylesheet" href="' . rex_path::addonAssets("fonts", $font["name"] . "/" . $font["name"] . ".css") . '">');
+        echo htmlspecialchars('<link rel="stylesheet" href="<?= rex_url::addonAssets("fonts", "' . $font["name"] . '/' . $font["name"] . '.css") ?>">');
         echo "</code>";
         echo  "</td>";
         echo  "</tr>";
