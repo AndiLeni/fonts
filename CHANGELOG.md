@@ -2,17 +2,11 @@
 
 
 
-## [x] - x
+## [1.0.2] - 17.11.2022
 
-### Added
-
-### Changed
+### Changes
+- add page for installed fonts
 - add php version requirement to package.yml
-
-### Removed
-
-### Vendor Updates
-
 
 
 ## [1.0.1] - 29.10.2022
