@@ -1,6 +1,6 @@
 fonts_title = Schriftarten von Google Fonts abrufen
 fonts_installed = Folgende Schriftarten wurden lokal heruntergeladen
-fonts_installed_available_all = Es wurde eine eine CSS-Datei generiert, die alle Schriften beinhaltet:
+fonts_installed_available_all = Es wurde eine CSS-Datei generiert, die alle Schriften beinhaltet:
 fonts_installed_available_single = Für die Schriftart wurde eine einzelne CSS-Datei generiert:
 fonts_install = Installieren
 fonts_install_selected = Auswahl lokal herunterladen
