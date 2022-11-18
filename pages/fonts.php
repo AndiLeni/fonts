@@ -81,16 +81,16 @@ if ($selected_variants != []) {
                                 "fontFamily" => $font_family,
                                 "fontStyle" => $fv['fontStyle'],
                                 "fontWeight" => $fv['fontWeight'],
-                                "fileName" => $filename,
+                                // "fileName" => $filename,
                                 "name" => $font['id'] . '-' . $font['version'] . '-' . $fv['fontWeight'] . '-' . $fv['fontStyle'],
                                 "formats" => $available_font_formats,
                                 "id" => $font['id'],
-                                "version" => $font['version'],
-                                "subset" => $font['defSubset'],
-                                "identifier" => $font['id'] . '-' . $font['version'] . '-' . $font['defSubset']
+                                // "version" => $font['version'],
+                                // "subset" => $font['defSubset'],
+                                // "identifier" => $font['id'] . '-' . $font['version'] . '-' . $font['defSubset']
                             ];
                         } else {
-                            echo "Error " . $filename;
+                            echo rex_view::error("Error bei: " . $filename);
                         }
                     } catch (rex_socket_exception $e) {
                         echo rex_view::error($e->getMessage());
