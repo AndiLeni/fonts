@@ -70,8 +70,11 @@ class fonts
             */
         }
 
+        // remove leading '..' from url for correct ressource loading in the browser
+        $addon_assets_path = ltrim(rex_url::addonAssets('fonts'), '.');
+
         foreach ($css_files as $css_file) {
-            $css_all = '@import url("' . rex_url::addonAssets('fonts') . $css_file . '");' . PHP_EOL;
+            $css_all = '@import url("' . $addon_assets_path . $css_file . '");' . PHP_EOL;
             file_put_contents(rex_path::addonAssets("fonts/", "gfonts.css"), $css_all, FILE_APPEND);
         }
     } // End generateCss()
