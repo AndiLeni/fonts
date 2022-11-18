@@ -18,7 +18,7 @@
     </p>
     <p>
         <code>
-            <?php echo htmlspecialchars('<link href="' . rex_url::addonAssets('fonts', 'gfonts.css') . '" rel="stylesheet">') ?>
+            <?php echo htmlspecialchars('<link href="<?= rex_url::addonAssets("fonts", "gfonts.css"); ?>" rel="stylesheet">') ?>
         </code>
     </p>
     <strong><?php echo rex_i18n::msg("fonts_installed_available_single") ?></strong>
@@ -30,7 +30,9 @@
     <p>
         <code>
 
-            <?php echo htmlspecialchars('<link href="' . rex_url::addonAssets("fonts", array_key_first($this->font_saves) . '/' . array_key_first($this->font_saves) . '.css" rel="stylesheet">')) ?>
+            <?php
+            echo htmlspecialchars('<link href="<?= rex_url::addonAssets("fonts", "' . array_key_first($this->font_saves) . '/' . array_key_first($this->font_saves) . '.css") ?>" rel="stylesheet">');
+            ?>
         </code>
     </p>
 </div>
