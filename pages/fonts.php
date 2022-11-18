@@ -160,7 +160,7 @@ try {
         $json = $response->getBody();
         $available_fonts = json_decode($json, true);
     } else {
-        echo "Error";
+        echo rex_view::error(rex_i18n::msg("fonts_error_api_response_code"));
         exit;
     }
 } catch (rex_socket_exception $e) {

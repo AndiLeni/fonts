@@ -66,6 +66,24 @@ foreach ($font_folders as $folder) {
     ];
 }
 
+?>
+
+<h4>CSS Datei mit allen installierten Schriften:</h4>
+<p>Diese Datei lädt alle Schriften.</p>
+<pre style="padding: 0;">
+    <code>
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;&lt;?= rex_url::addonAssets(&quot;fonts&quot;, &quot;gfonts.css&quot;) ?&gt;&quot;&gt;
+    </code>
+</pre>
+
+<hr>
+
+<h4>CSS Dateien mit je einer installierten Schrift:</h4>
+<p>Diese Dateien laden nur die jeweilige Schrift.</p>
+<?php
+
 $fragment = new rex_fragment();
 $fragment->setVar("installed_fonts", $fonts, false);
 echo $fragment->parse("installed_fonts.php");
+
+?>
