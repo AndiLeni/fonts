@@ -15,4 +15,4 @@ fonts_licence = Lizenz
 
 fonts_error_save_woff = Schriftart konnte nicht gespeichert werden
 fonts_error_save_css = CSS Datei konnte nicht gespeichert werden
-fonts_error_api_response_code = API Zugriff auf google-webfonts-helper.herokuapp.com nicht möglich. Response Code != 200 OK
+fonts_error_api_response_code = API Zugriff auf gwfh.mranftl.com nicht möglich. Response Code != 200 OK

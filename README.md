@@ -1,6 +1,6 @@
 # REDAXO Fonts Addon
 Dieses Addon kann Schriftarten von Google Fonts auf den Webspace laden um diese datenschutzkonform zu nutzen.
-Genutzt wird dafür die API von google-webfonts-helper.herokuapp.com. Schriftdateien werden direkt von Google heruntergeladen.
+Genutzt wird dafür die API von gwfh.mranftl.com. Schriftdateien werden direkt von Google heruntergeladen.
 
 ![splashscreen](https://user-images.githubusercontent.com/16903055/198571774-f7a79435-3925-41f1-9ef3-797ce97041d2.png)
 
