@@ -1,6 +1,12 @@
 # Changelog 
 
 
+## [1.2.0] - 11.02.2023
+
+### Changes
+- fix api endpoint / [#20](https://github.com/AndiLeni/fonts/issues/20)
+
+
 
 ## [1.0.2] - 17.11.2022
 
